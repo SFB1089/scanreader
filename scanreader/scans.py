@@ -21,6 +21,9 @@ BaseScan
                 Scan2019a
                 Scan2019b
                 Scan2020
+                Scan2021
+                Scan2022
+                Scan2023
     ScanMultiRoi
 """
 from tifffile import TiffFile
@@ -675,6 +678,13 @@ class Scan2021(Scan5Point3):
     """ ScanImage 2021"""
     pass
 
+class Scan2022(Scan5Point3):
+    """ ScanImage 2021"""
+    pass
+
+class Scan2023(Scan5Point3):
+    """ ScanImage 2021"""
+    pass
 
 class ScanMultiROI(NewerScan, BaseScan):
     """An extension of ScanImage v5 that manages multiROI data (output from mesoscope).
