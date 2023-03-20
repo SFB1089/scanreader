@@ -679,11 +679,11 @@ class Scan2021(Scan5Point3):
     pass
 
 class Scan2022(Scan5Point3):
-    """ ScanImage 2021"""
+    """ ScanImage 2022"""
     pass
 
 class Scan2023(Scan5Point3):
-    """ ScanImage 2021"""
+    """ ScanImage 2023"""
     pass
 
 class ScanMultiROI(NewerScan, BaseScan):
