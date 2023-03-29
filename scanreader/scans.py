@@ -238,6 +238,17 @@ class BaseScan():
         return scanner_type
 
     @property
+    def user_functions(self):
+        # define the regular expression pattern
+        pattern = r'SI\.hUserFunctions\..*'
+
+        # search for all occurrences of the pattern in the input text
+        # matches = re.findall(pattern, data)
+        match = re.findall(pattern, self.header)
+        user_functions = match #match.group('scanner_type') if match else None
+        return user_functions
+
+    @property
     def motor_position_at_zero(self):
         """ Motor position (x, y and z in microns) corresponding to the scan's (0, 0, 0)
         point. For non-multiroi scans, (x=0, y=0) marks the center of the FOV."""
