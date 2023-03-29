@@ -245,7 +245,23 @@ class BaseScan():
         # search for all occurrences of the pattern in the input text
         # matches = re.findall(pattern, data)
         match = re.findall(pattern, self.header)
-        user_functions = match #match.group('scanner_type') if match else None
+        user_function_strg = match #match.group('scanner_type') if match else None
+
+        user_functions = {}
+        for item in user_function_strg:
+            key_val = item.split(' = ')
+            if len(key_val) > 1:
+                key = key_val[0].strip()
+                val = key_val[1].strip()
+                if val.startswith('{') and val.endswith('}'):
+                    val = eval(val)
+                elif val.startswith("'") and val.endswith("'"):
+                    val = val[1:-1]
+                elif val == "true":
+                    val = True
+                elif val == "false":
+                    val = False
+                user_functions[key] = val
         return user_functions
 
     @property
