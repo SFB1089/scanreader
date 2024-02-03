@@ -524,6 +524,12 @@ class BaseScan5(BaseScan):
         zoom = float(match.group('zoom')) if match else None
         return zoom
 
+    @property #TR24: added property to get the power percent
+    def power_percent(self):
+        match = re.search(r'hBeams\.powers = (?P<power>.*)', self.header)
+        power = float(match.group('power')) if match else None
+        return power
+
     @property
     def is_slow_stack_with_fastZ(self):
         match = re.search(r'hMotors\.motorSecondMotorZEnable = (?P<uses_fastZ>.*)',
