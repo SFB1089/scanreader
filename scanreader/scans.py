@@ -524,6 +524,12 @@ class BaseScan5(BaseScan):
         zoom = float(match.group('zoom')) if match else None
         return zoom
 
+    @property #TR24: added property to get the scan start datetime
+    def date(self):
+        match = re.search(r'epoch = (?P<date>.*)', self.header)
+        date = (match.group('zoom') if match else None
+        return date
+
     @property #TR24: added property to get the power percent
     def power_percent(self):
         match = re.search(r'hBeams\.powers = (?P<power>.*)', self.header)
