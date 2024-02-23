@@ -31,6 +31,7 @@ from tifffile.tifffile import matlabstr2py
 import numpy as np
 import re
 import itertools
+from datetime import datetime #TR24: added to get the date in MYSQL format
 from . import utils
 from .multiroi import ROI
 from .exceptions import FieldDimensionMismatch
@@ -527,7 +528,9 @@ class BaseScan5(BaseScan):
     @property #TR24: added property to get the scan start datetime
     def date(self):
         match = re.search(r'epoch = (?P<date>.*)', self.header)
-        date = (match.group('zoom') if match else None
+        dateraw = match.group('date') if match else None
+        dt = datetime.strptime(dateraw, '[%Y %m %d %H %M %S.%f]')
+        date = dt.strftime('%Y-%m-%d %H:%M:%S') #MYSQL datetime format
         return date
 
     @property #TR24: added property to get the power percent
