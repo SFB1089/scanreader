@@ -536,8 +536,19 @@ class BaseScan5(BaseScan):
     @property #TR24: added property to get the power percent
     def power_percent(self):
         match = re.search(r'hBeams\.powers = (?P<power>.*)', self.header)
-        power = float(match.group('power')) if match else None
-        return power
+        power = match.group('power')
+
+        if power.startswith('[') and power.endswith(']'):
+            # Remove the brackets and split the numbers
+            power = power[1:-1]
+            power_list = power.split()
+            power_array = np.array([int(num) for num in power_list])
+
+        else:
+            # Otherwise, just convert the single number to an array
+            power_array = np.array([int(power)])
+        
+        return power_array
 
     @property
     def is_slow_stack_with_fastZ(self):
