@@ -24,6 +24,7 @@ BaseScan
                 Scan2021
                 Scan2022
                 Scan2023
+                Scan2024
     ScanMultiRoi
 """
 from tifffile import TiffFile
@@ -542,11 +543,11 @@ class BaseScan5(BaseScan):
             # Remove the brackets and split the numbers
             power = power[1:-1]
             power_list = power.split()
-            power_array = np.array([int(num) for num in power_list])
+            power_array = np.array([float(num) for num in power_list])
 
         else:
             # Otherwise, just convert the single number to an array
-            power_array = np.array([int(power)])
+            power_array = np.array([float(power)])
         
         return power_array
 
